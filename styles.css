@@ -38,6 +38,7 @@
   --unpaid-bg: #7000ff1a;
   --unpaid-cl: #7000ff;
   --navbar-cl: #02000a;
+  /* --bg-mobile-nav-content: #000614; */
 }
 
 [data-theme="dark"] {
@@ -52,7 +53,7 @@
   --nav-active: #427e5a36;
   --table-row: #edf8d214;
   --toggle-bg: #ffffff;
-  /* Dark mode uses your green gradient for the circle */
+  /* Dark mode uses the green gradient for the circle */
   --inner-circle: linear-gradient(133.93deg, #03d17a -14.79%, #7ac231 96.67%);
   --placeholder-bg: #9b9b9b;
   --notify-bg: #ffffff0c;
@@ -73,6 +74,7 @@
   --unpaid-bg: #7000ff26;
   --unpaid-cl: #7000ff;
   --navbar-cl: #9b9b9b;
+  /* --bg-mobile-nav-content: #ffffff; */
 }
 
 body {
@@ -95,18 +97,18 @@ body {
   right: 0;
   left: 0;
   z-index: 100;
-  margin-left: 15%;
-  padding-left: 7%;
+  margin-left: 16%;
+  padding-left: 6%;
   margin-right: 20px;
   height: 80px;
   display: flex;
   align-items: center;
   background-color: var(--bg-header);
   border-bottom: 1px solid var(--border-ui);
-  width: 1200px;
+  width: calc(1200px - 1.8%);
 }
 .username-section {
-  width: 43.5%;
+  width: 42.5%;
 }
 .username-section p {
   font-size: 18px;
@@ -146,7 +148,9 @@ body {
   height: 23.52px;
   border-radius: 16px;
   background: var(--inner-circle);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s;
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s;
 }
 [data-theme="dark"] .inner-circle {
   transform: translateX(18px);
@@ -179,13 +183,18 @@ body {
   height: 30px;
   width: 130px;
   border-radius: 40px;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
+  color: var(--text-main);
+}
+.search-input:focus {
+  outline: none;
 }
 .search-input::placeholder {
   font-size: 14px;
   font-weight: 300;
   color: var(--placeholder-bg);
+  border: none;
 }
 .notification-section {
   display: flex;
@@ -245,7 +254,7 @@ body {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 15%;
+  width: 16%;
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--border-ui);
@@ -258,13 +267,23 @@ body {
 .navbar {
   display: flex;
   flex-direction: column;
-  padding-left: 24px;
+  padding-left: 26px;
   gap: 34px;
+}
+.logo-container {
+  position: fixed;
+  /* top: 30px;
+  left: 55px; */
+  left: 0;
+  top: 0;
+  height: 80px;
+  z-index: 100;
+  width: 15%;
+  background-color: var(--bg-header);
 }
 .logo {
   width: 130px;
   margin-left: 55px;
-  margin-bottom: 70px;
   margin-top: 30px;
 }
 .logo-img {
@@ -277,8 +296,9 @@ body {
   gap: 20px;
 }
 .dash {
-  margin-left: 8px;
+  margin-left: 12px;
   margin-bottom: 20px;
+  margin-top: 150px;
 }
 .navbar-one:first-child {
   width: 205px;
@@ -423,7 +443,7 @@ main {
   flex-direction: column;
   gap: 10px;
   width: 280px;
-  height: 130px;
+  height: 135px;
   border-radius: 13px;
   background-color: var(--card-bg);
   padding: 15px 0 20px 45px;
@@ -466,7 +486,7 @@ main {
   justify-content: center;
   border-radius: 20px;
   width: 200px;
-  height: 34px;
+  height: 28px;
   padding: 8px;
   background-color: var(--invoice-bg);
 }
@@ -502,6 +522,10 @@ main {
   font-size: 18px;
   color: var(--text-main);
 }
+.calendar-container {
+  position: relative; /* This is the anchor */
+  cursor: pointer;
+}
 .calendar {
   display: flex;
   align-items: center;
@@ -522,6 +546,52 @@ main {
   width: 11.23px;
   height: 12.38px;
 }
+.calendar-dropdown {
+  display: none;
+  position: absolute;
+  top: 110%; /* Sits just below the trigger */
+  right: 0;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-ui);
+  border-radius: 8px;
+  list-style: none;
+  padding: 5px 0;
+  width: 160px;
+  z-index: 1000;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+
+  /* THE SCROLLING PART */
+  max-height: 180px; /* Short height for 12 items */
+  overflow-y: auto; /* Vertical scrollbar */
+}
+
+/* Custom Scrollbar for a premium look */
+.calendar-dropdown::-webkit-scrollbar {
+  width: 5px;
+}
+
+.calendar-dropdown::-webkit-scrollbar-thumb {
+  background: var(--border-ui);
+  border-radius: 10px;
+}
+
+.calendar-dropdown.active {
+  display: block; /* Shown when JS toggles it */
+}
+
+.calendar-dropdown li {
+  padding: 10px 15px;
+  font-size: 13px;
+  color: var(--text-main);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.calendar-dropdown li:hover {
+  background-color: var(--row-bg);
+  color: #7ac231; /* Your brand green */
+}
 .platform {
   font-weight: 400;
   font-size: 12px;
@@ -533,13 +603,13 @@ main {
   align-items: center;
   gap: 46px;
 }
-.chart-container {
+/* .chart-container {
   display: flex;
   align-items: center;
   gap: 44px;
   position: relative;
   margin-top: 15px;
-}
+} */
 
 .single-bar {
   position: relative;
@@ -555,12 +625,12 @@ main {
   font-size: 15px;
   color: var(--text-main);
 }
-.chart-line {
+/* .chart-line {
   height: 160px;
   background-color: #e0e0e0;
   opacity: 0.7;
-}
-.chart-bar {
+} */
+/* .chart-bar {
   display: block;
   position: absolute;
   bottom: 16px;
@@ -573,8 +643,51 @@ main {
     rgba(216, 216, 216, 0.12) -6.62%,
     rgba(196, 196, 196, 0) 109.71%
   );
+} */
+.chart-bar {
+  position: absolute;
+  bottom: 20px;
+  width: 28px;
+  /* background: rgba(214, 208, 208, 0.2); */
+  background: linear-gradient(
+    359.83deg,
+    rgba(216, 216, 216, 0.12) -6.62%,
+    rgba(196, 196, 196, 0) 109.71%
+  );
+  transition:
+    height 0.5s ease,
+    background-color 0.5s ease;
 }
-.may-chart-bar {
+/* Container must be relative so children can be absolute */
+.chart-container {
+  position: relative;
+  display: flex;
+  align-items: flex-end; /* Aligns bars to the bottom */
+  gap: 44px;
+  height: 200px;
+}
+
+/* The SVG lines layer */
+.chart-curves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  pointer-events: none; /* Allows clicking through to the months */
+}
+/* Highlight the bar when it's selected */
+.active-bar {
+  background-color: rgb(214, 208, 208);
+  opacity: 0.4;
+}
+/* Smooth transition for SVG paths */
+#red-path,
+#green-path {
+  transition: d 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  stroke-linejoin: round;
+}
+/* .may-chart-bar {
   display: block;
   position: absolute;
   bottom: 16px;
@@ -583,15 +696,42 @@ main {
   height: 115px;
   opacity: 0.2;
   background-color: rgb(214, 208, 208);
-}
+} */
 
 .single-bar p {
   font-weight: 300;
   font-size: 12px;
   color: var(--text-main);
   margin-left: -10px;
+  cursor: pointer;
 }
 .earn {
+  position: absolute;
+  /* REMOVED: top: -16px and left: 191px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 53px;
+  height: 34.08px;
+  border-radius: 4.87px;
+  background: linear-gradient(101.43deg, #03d17a -0.53%, #afed09 97.73%);
+  box-shadow: 0px 9.74px 9.47px 0px #dbdbdc12;
+
+  /* ADDED: Smooth movement and depth */
+  z-index: 20;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none; /* Allows clicks to pass through to the month labels below */
+}
+
+.earn p {
+  font-weight: 400;
+  color: white;
+  font-size: 9px;
+  margin: 0; /* Ensures no extra spacing breaks the vertical centering */
+}
+/* .earn {
   position: absolute;
   top: -16px;
   left: 191px;
@@ -610,28 +750,38 @@ main {
   font-weight: 400;
   color: white;
   font-size: 9px;
-}
-.red-curve {
+} */
+/* .red-curve {
   position: absolute;
   top: 25px;
   left: 2px;
 }
 .red-curve img {
   width: 430px;
-}
-.chart-dot {
+} */
+/* .chart-dot {
   position: absolute;
   top: 16px;
   left: 210px;
+} */
+.chart-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #ff4d4d;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  z-index: 15;
+  transition: all 0.6s ease;
 }
-.green-curve {
+/* .green-curve {
   position: absolute;
   top: 40px;
   left: 2px;
 }
 .green-curve img {
   width: 430px;
-}
+} */
 .first-right-section {
   display: flex;
   flex-direction: column;
@@ -858,6 +1008,10 @@ main {
   .mobile-logo {
     width: 130px;
   }
+  .toggle {
+    margin-left: 120px;
+  }
+
   .mobile-logo-img,
   .close {
     width: 100%;
@@ -890,7 +1044,7 @@ main {
     max-height: 0px;
     pointer-events: 0;
     position: absolute;
-    top: 60px;
+    top: 70px;
     right: 20px;
     display: flex;
     flex-direction: column;
@@ -899,10 +1053,14 @@ main {
     padding-bottom: 50px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    background-color: #02000a;
+    background-color: var(--bg-body);
     width: 65%;
     transform: translateY(-8px);
-    transition: max-height 300ms ease, opacity 300ms ease, transform 300ms ease;
+    transition:
+      max-height 300ms ease,
+      opacity 300ms ease,
+      transform 300ms ease;
+    z-index: 100;
   }
   .mobile-nav-content.open {
     max-height: 1000px;
@@ -982,7 +1140,6 @@ main {
   .navbar-one h5,
   .navbar-two h5 {
     font-size: 17px;
-    color: #ffffff;
   }
   .dash-text {
     color: #7ac231;
@@ -992,7 +1149,6 @@ main {
     font-style: bold;
     font-size: 11px;
     margin-top: 20px;
-    color: #ffffff;
   }
   .developer-section {
     margin-top: -15px;
@@ -1021,7 +1177,6 @@ main {
   }
   .dev-list p {
     font-size: 11px;
-    color: #ffffff;
   }
   .sidebar-square {
     display: none;
@@ -1050,9 +1205,12 @@ main {
     margin-top: 10px;
     border: 2px solid #f5f5f5;
   }
+  .notification-section {
+    position: relative;
+  }
 
   main {
-    margin: 230px 20px 50px;
+    margin: 260px 20px 50px;
   }
   .first-section {
     display: flex;
@@ -1065,13 +1223,13 @@ main {
   }
   .total-invoice {
     gap: 4px;
-    width: 180px;
-    height: 107px;
+    width: 170px;
+    height: 94px;
     padding: 15px 0 20px 20px;
     margin-bottom: 20px;
   }
   .invoice-head {
-    font-size: 12px;
+    font-size: 10px;
   }
   .money {
     display: flex;
@@ -1081,27 +1239,28 @@ main {
   }
   .naira {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 15px;
   }
   .amount {
-    font-size: 26px;
+    font-size: 22px;
   }
   .lastweek-invoice {
-    gap: 5px;
-    width: 150px;
-    height: 18px;
+    gap: 3px;
+    width: 130px;
+    height: 24px;
   }
   .lastweek-payment {
-    gap: 5px;
-    width: 150px;
-    height: 18px;
+    white-space: nowrap;
+    gap: 3px;
+    width: 140px;
+    height: 22px;
   }
   .invoice-percent {
-    font-size: 9px;
+    font-size: 8px;
   }
   .red-arrow {
-    width: 9px;
-    height: 9px;
+    width: 7px;
+    height: 7px;
   }
   .invoice-text {
     font-size: 10px;
@@ -1109,7 +1268,7 @@ main {
   .monthly-chart {
     padding: 15px 15px;
     margin-top: 20px;
-    width: 368px;
+    width: 350px;
     height: 248px;
   }
   .monthly-view h6 {
@@ -1126,17 +1285,58 @@ main {
     align-items: center;
     gap: 28px;
   }
-  .chart-container {
+  /* .chart-container {
     display: flex;
     align-items: center;
     gap: 30px;
     position: relative;
     margin-top: 15px;
+  } */
+  .chart-container {
+    display: flex !important;
+    width: 100% !important;
+    /* Spreads them out so they don't overlap */
+    justify-content: space-between !important;
+    gap: 0 !important;
+    height: 120px;
+    padding: 0 10px;
+    align-items: flex-end;
+    position: relative;
   }
 
   .single-bar {
-    position: relative;
+    /* Ensures each month column stays narrow */
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: -5px;
   }
+
+  .chart-curves {
+    width: 100% !important;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* Make sure the dot is actually visible! */
+  .chart-dot {
+    display: block !important;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff4d4d;
+    border-radius: 50%;
+    z-index: 10;
+  }
+
+  .single-bar p {
+    font-size: 7px; /* Smaller so labels don't crash */
+    margin-top: 5px;
+  }
+
   .income-bar {
     margin-top: 20px;
     display: flex;
@@ -1146,30 +1346,33 @@ main {
   .income-bar p {
     font-size: 10px;
   }
+  /* .single-bar {
+    position: relative;
+  }
   .chart-line {
     height: 160px;
     background-color: #e0e0e0;
     opacity: 0.7;
-  }
-  .chart-bar {
+  } */
+  /* .chart-bar {
     bottom: 13px;
     left: -8.5px;
     width: 18px;
     height: 64px;
     opacity: 1;
-  }
-  .may-chart-bar {
+  } */
+  /* .may-chart-bar {
     bottom: 13px;
     left: -8.5px;
     width: 18px;
     height: 100px;
     opacity: 0.2;
-  }
+  } */
 
-  .single-bar p {
+  /* .single-bar p {
     font-size: 8px;
-  }
-  .earn {
+  } */
+  /* .earn {
     top: 14px;
     left: 115px;
     gap: 3px;
@@ -1195,7 +1398,7 @@ main {
   }
   .green-curve img {
     width: 265px;
-  }
+  } */
   .first-right-section {
     display: flex;
     flex-direction: column;
@@ -1205,14 +1408,14 @@ main {
     display: none;
   }
   .mobile-balance-section {
-    width: 368px;
+    width: 350px;
     height: 175px;
     border-radius: 20px;
     background: linear-gradient(101.43deg, #03d17a -0.53%, #afed09 97.73%);
     display: flex;
     align-items: center;
     gap: 72px;
-    padding-left: 62px;
+    padding-left: 42px;
   }
 
   .right-balance {
@@ -1259,15 +1462,19 @@ main {
     border-radius: 3px;
   }
   .transactions-section {
-    width: 368px;
+    width: 350px;
     height: 192px;
+    margin-top: -50px;
   }
   .withdrawal-history {
-    gap: 135px;
+    gap: 110px;
     margin-bottom: 10px;
   }
   .transactions-line {
-    width: 368px;
+    width: 350px;
+  }
+  .deposit-history {
+    gap: 94px;
   }
   .withdrawal {
     gap: 8px;
@@ -1284,7 +1491,7 @@ main {
   .recent-container {
     padding: 30px 15px;
     margin-top: 25px;
-    width: 368px;
+    width: 350px;
     min-height: 362px;
     height: auto;
     overflow-x: auto;
@@ -1322,70 +1529,163 @@ main {
     font-size: 12px;
   }
 }
-@media screen and (min-width: 481px) and (max-width: 1280px) {
-  /* ADD THIS TO THE VERY TOP OF YOUR CSS FILE */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  /* FIXED: Use width 100% and calc to prevent header overflow */
-  .desktop-header {
-    margin-left: 23%;
-    width: calc(100% - 24%);
-    padding: 0 2%;
+@media screen and (min-width: 481px) and (max-width: 820px) {
+  .mobile-head {
+    position: fixed;
+    top: 0;
+    right: 0;
     left: 0;
-    height: 100px;
+    z-index: 200;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-header);
+    display: block;
+    padding: 30px 60px;
   }
-  .username-section {
-    width: 24%;
+  .mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
   }
-  .username-section h1 {
-    font-size: 26px;
+  .mobile-logo {
+    width: 150px;
   }
-  .toggle-section {
-    width: 18%;
+  .toggle {
+    margin-left: 370px;
   }
-  .search-section {
-    width: 165px;
+  .outer-circle-container {
+    position: relative;
+    width: 50px;
+    height: 32px;
   }
-  .last-section {
-    gap: 8px;
+  .inner-circle {
+    width: 28.82px;
+    height: 28.52px;
   }
-  .arrow-down {
-    margin-left: -2px;
+  .mobile-logo-img,
+  .close {
+    width: 100%;
+  }
+  .menu-icon {
+    background: none;
+    border: none;
+  }
+  .close-icon {
+    width: 40px;
+    height: 28px;
+    display: none;
+    background: none;
+    border: none;
+    /* margin-right: -50px; */
+    margin-top: -20px;
+  }
+  .mobile-navbar {
+    display: flex;
+    align-items: center;
+  }
+  .mobile-navbar.open .menu-icon {
+    display: none;
+  }
+  .mobile-navbar.open .close-icon {
+    display: block;
+  }
+  .mobile-nav-content {
+    opacity: 0;
+    max-height: 0px;
+    pointer-events: 0;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-ui);
+    /* justify-content: center;
+    align-items: center; */
+    padding-left: 45px;
+    padding-bottom: 50px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: var(--bg-body);
+    width: 35%;
+    transform: translateY(-8px);
+    transition:
+      max-height 300ms ease,
+      opacity 300ms ease,
+      transform 300ms ease;
+    z-index: 100;
+  }
+  .mobile-nav-content.open {
+    max-height: 1000px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
   .desktop-nav {
-    width: 23%;
+    display: none;
   }
-  .logo {
-    width: 110px;
-    margin-left: 45px;
-    margin-bottom: 70px;
-    margin-top: 30px;
+  .mobile-nav-content::-webkit-scrollbar {
+    display: none;
+  }
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    padding-left: 24px;
+    gap: 34px;
+  }
+
+  .navbar-one,
+  .navbar-two {
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
   .dash {
     margin-left: 8px;
     margin-bottom: 20px;
   }
   .navbar-one:first-child {
-    width: 160px;
-    height: 50px;
-    padding-left: 17px;
+    width: 0;
+    background-color: none;
+    border: none;
+    height: 0px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    padding-left: 0px;
   }
   .dashboard-icon,
   .account-icon,
   .deposit-icon,
   .withdraw-icon,
   .invoice-icon,
-  .support-icon,
-  .wallet-icon,
+  .support-icon {
+    width: 17px;
+  }
+  .wallet-icon {
+    width: 17px;
+    height: 17px;
+  }
   .transaction-icon {
-    width: 18px;
+    width: 17px;
+    height: 17px;
   }
   .funds-icon {
-    width: 18px;
-    height: 23px;
+    width: 16px;
+    height: 21px;
+  }
+  .account-arrow {
+    margin-left: 5px;
+    margin-top: 3px;
+  }
+  .deposit-arrow {
+    margin-left: 38px;
+  }
+  .withdraw-arrow {
+    margin-left: 26px;
+  }
+  .invoice-arrow {
+    margin-left: 45px;
   }
   .arrow-right {
     width: 14px;
@@ -1393,314 +1693,137 @@ main {
   }
   .navbar-one h5,
   .navbar-two h5 {
-    font-size: 16px;
+    font-size: 17px;
   }
-  .account-arrow {
-    margin-left: -5px;
-    margin-top: 3px;
-  }
-  .deposit-arrow {
-    margin-left: 25px;
-  }
-  .withdraw-arrow {
-    margin-left: 13px;
-  }
-  .invoice-arrow {
-    margin-left: 30px;
+  .dash-text {
+    color: #7ac231;
   }
   .merchant {
-    font-size: 12px;
+    font-weight: 600;
+    font-style: bold;
+    font-size: 11px;
+    margin-top: 20px;
+  }
+  .developer-section {
+    margin-top: -15px;
   }
   .developer-icon {
-    width: 16px;
-    height: 8px;
+    width: 15px;
+    height: 7px;
   }
   .dev-arrow-down {
+    margin-left: 20px;
     width: 14px;
     height: 14px;
-    margin-left: 7px;
+  }
+  .dev-dropdown {
+    margin-left: 38px;
+  }
+  .dev-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 8px;
   }
   .ellipse {
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
   }
   .dev-list p {
-    font-size: 11.5px;
+    font-size: 11px;
   }
   .sidebar-square {
-    width: 150px;
-    height: 160px;
+    display: none;
   }
-  .squares {
-    gap: 2px;
-    margin-left: 16px;
+  .desktop-header {
+    display: none;
   }
-  .square-text {
-    gap: 4px;
+  .mobile-second-header {
+    padding-top: 40px;
+    opacity: 1;
   }
-  .square-text h3 {
-    font-size: 24px;
+  .first-mobile-area {
+    display: flex;
   }
-  .square-text h6 {
-    font-size: 13px;
+  .toggle-section {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 16%;
   }
-  .square-text p {
-    font-size: 11.5px;
+  .searchbar {
+    width: 28px;
   }
-  /* main {
-    padding-top: 20px;
-  } */
+  .search-input {
+    height: 50px;
+    width: 130px;
+    font-size: 16px;
+    border: none;
+  }
+  .search-input::placeholder {
+    font-size: 16px;
+  }
+  .notification-section {
+    width: 48px;
+    height: 48px;
+  }
+  .notification-container {
+    width: 34px;
+    height: 34px;
+  }
 
-  /* FIXED: Main content needs to use flexible margins */
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .profile-img {
+    width: 52px;
+    height: 52px;
+  }
+  .username-section {
+    width: 90%;
+  }
+  .username-section p {
+    font-size: 19px;
+  }
+  .username-section h1 {
+    font-size: 34px;
+  }
+  .search-section {
+    width: 376px;
+    margin-top: 16px;
+    border: 2px solid #f5f5f5;
+  }
+
   main {
-    margin-left: 25%; /* Reduced slightly from 25% to give more room */
-    margin-right: 15px;
-    margin-top: 150px;
-    width: 600px; /* Let it flow naturally */
+    margin: 270px 60px;
   }
-
-  /* --- FIRST SECTION (Grid) --- */
   .first-section {
-    display: flex; /* Swapping to Flex column for easier tablet control */
+    display: flex;
     flex-direction: column;
-    gap: 20px;
   }
-
-  /* FIXED: Set to width 100% so they don't push the screen out */
-  /* .payment-history,
-  .monthly-chart,
-  .balance-section,
-  .transactions-section {
-    width: 100% !important;
-    max-width: 100%;
-    box-sizing: border-box;
-  } */
   .payment-history {
     display: flex;
     gap: 44px;
   }
   .total-invoice {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 270px;
-    height: 130px;
-    border-radius: 13px;
-    background-color: var(--card-bg);
+    width: 680px;
+    height: 140px;
     padding: 15px 0 20px 45px;
   }
-  .invoice-head {
-    font-size: 16px;
-    font-weight: 550;
-    color: var(--text-main);
-  }
-  .money {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    margin-left: -13px;
-  }
-  .naira {
-    font-weight: 700;
-    font-size: 20px;
-  }
-  .amount {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--text-main);
-  }
-  .lastweek-invoice {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    width: 180px;
-    height: 34px;
-    background-color: var(--invoice-bg);
-    padding: 8px;
-  }
-  .lastweek-payment {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    width: 200px;
-    height: 34px;
-    padding: 8px;
-    background-color: var(--invoice-bg);
-  }
-  .invoice-percent {
-    font-weight: 500;
-    font-size: 12px;
-    color: var(--percent-cl);
-  }
-  .red-arrow {
-    width: 9px;
-    height: 9px;
-  }
-  .invoice-text {
-    font-weight: 400;
-    font-size: 13px;
-    color: var(--text-main);
-  }
   .monthly-chart {
-    /* padding: 25px 10px 15px 25px; */
-    padding: 15px;
-    margin-top: 20px;
-    width: 590px;
-    height: 290px;
+    padding: 25px 10px 15px 45px;
+    margin-top: 30px;
+    width: 650px;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid var(--border-ui);
   }
   .monthly-view {
     display: flex;
-    justify-content: space-between; /* Automatically pushes items to edges */
-    width: 100%;
-    gap: 10px; /* Only a tiny gap needed now */
-  }
-  /* Scaling the chart images so they don't overflow the container */
-  .red-curve img,
-  .green-curve img {
-    width: 100%;
-    height: auto;
-  }
-  .monthly-view h6 {
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--text-main);
-  }
-  .calendar {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 120px;
-    height: 34px;
-    border-radius: 5px;
-    background-color: var(--cal-bg);
-    border: 0.5px solid #9b9b9b;
-  }
-  .calendar p {
-    font-weight: 300;
-    font-size: 12px;
-    color: var(--text-main);
-  }
-  .calendar-icon {
-    width: 11.23px;
-    height: 12.38px;
-  }
-  .platform {
-    font-weight: 400;
-    font-size: 12px;
-    color: var(--text-main);
-    margin-top: 6px;
-  }
-  .chart {
-    display: flex;
-    align-items: center;
-    gap: 46px;
-  }
-  .chart-container {
-    display: flex;
-    align-items: center;
-    gap: 44px;
-    position: relative;
-    margin-top: 15px;
-  }
-
-  .single-bar {
-    position: relative;
-  }
-  .income-bar {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  .income-bar p {
-    font-weight: 400;
-    font-size: 15px;
-    color: var(--text-main);
-  }
-  .chart-line {
-    height: 160px;
-    background-color: #e0e0e0;
-    opacity: 0.7;
-  }
-  .chart-bar {
-    display: block;
-    position: absolute;
-    bottom: 16px;
-    left: -13px;
-    width: 28px;
-    height: 64px;
-    opacity: 1;
-    background: linear-gradient(
-      359.83deg,
-      rgba(216, 216, 216, 0.12) -6.62%,
-      rgba(196, 196, 196, 0) 109.71%
-    );
-  }
-  .may-chart-bar {
-    display: block;
-    position: absolute;
-    bottom: 16px;
-    left: -13px;
-    width: 28px;
-    height: 115px;
-    opacity: 0.2;
-    background-color: rgb(214, 208, 208);
-  }
-
-  .single-bar p {
-    font-weight: 300;
-    font-size: 12px;
-    color: var(--text-main);
-    margin-left: -10px;
-  }
-  .earn {
-    position: absolute;
-    top: -16px;
-    left: 191px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    width: 53px;
-    height: 34.08px;
-    border-radius: 4.87px;
-    background: linear-gradient(101.43deg, #03d17a -0.53%, #afed09 97.73%);
-    box-shadow: 0px 9.74px 9.47px 0px #dbdbdc12;
-  }
-  .earn p {
-    font-weight: 400;
-    color: white;
-    font-size: 9px;
-  }
-  .red-curve {
-    position: absolute;
-    top: 25px;
-    left: 10px;
-  }
-  .red-curve,
-  .green-curve {
-    width: 420px;
-  }
-  .chart-dot {
-    position: absolute;
-    top: 16px;
-    left: 210px;
-  }
-  .green-curve {
-    position: absolute;
-    top: 40px;
-    left: 2px;
-  }
-  .red-curve img,
-  .green-curve img {
-    width: 100%;
-    height: auto;
+    gap: 330px;
   }
   .first-right-section {
     display: flex;
@@ -1708,124 +1831,626 @@ main {
     gap: 32px;
   }
   .balance-section {
-    width: 430px;
-    height: 205px;
+    display: none;
+  }
+  .mobile-balance-section {
+    width: 650px;
+    height: 210px;
     border-radius: 20px;
     background: linear-gradient(101.43deg, #03d17a -0.53%, #afed09 97.73%);
     display: flex;
     align-items: center;
-    gap: 72px;
-    padding-left: 82px;
-  }
-  .right-balance {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .bal-outer-circle-container {
-    position: relative;
-  }
-  .bal-inner-circle {
-    width: 45px;
-    height: 27px;
-    border-radius: 16px;
-    background-color: #f8f7f78f;
-  }
-  .bal-outer-circle {
-    position: absolute;
-    top: 1.74px;
-    left: 20px;
-    width: 23.82px;
-    height: 23.52px;
-    border-radius: 16px;
-    background-color: white;
-  }
-  .right-balance h2 {
-    font-weight: 700;
-    font-size: 40px;
-    color: white;
-  }
-  .right-balance h5 {
-    font-weight: 500;
-    font-size: 18px;
-    color: white;
-  }
-  .right-balance p {
-    font-weight: 400;
-    font-size: 16px;
-    color: white;
-  }
-  .left-balance {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    margin-top: 28px;
-  }
-  .round-circle {
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
-    background-color: white;
+    gap: 300px;
+    padding-left: 62px;
+    margin-top: 30px;
   }
   .transactions-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    width: 430px;
-    height: 205px;
-    border-radius: 10px;
-    background-color: var(--transaction-bg);
-    gap: 16px;
+    padding-left: 62px;
+    width: 650px;
+    height: 210px;
   }
   .withdrawal-history {
-    display: flex;
-    align-items: center;
-    gap: 135px;
+    gap: 340px;
   }
   .transactions-line {
-    width: 399px;
-    height: 1.5px;
-    background: var(--line-bg);
+    width: 550px;
   }
   .deposit-history {
     display: flex;
     align-items: center;
-    gap: 119px;
+    gap: 310px;
   }
-  .withdrawal {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .withdrawal p {
-    font-weight: 400;
-    font-size: 14px;
-  }
-  .withdrawal h3 {
-    font-weight: 600;
-    font-size: 30px;
-  }
-  .withdrawal-arrow {
-    margin-top: -16px;
-  }
-
-  /* --- RECENT CONTAINER (The Table) --- */
   .recent-container {
-    width: 100%; /* Take full available 
-    width */
-    /* min-width: 200px; */
-    max-width: 590px;
+    padding-left: 25px;
+    padding-top: 30px;
+    margin-top: 25px;
+    width: 1110px;
+    height: 432px;
+    border-radius: 10px;
+    border: 1px solid var(--border-ui);
+  }
+  .recent-container {
+    padding: 30px 15px;
+    margin-top: 25px;
+    width: 650px;
+    min-height: 362px;
     height: auto;
-    padding: 20px 10px;
-    overflow-x: auto; /* Enable internal scroll for the table data */
+    overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
   }
-
-  /* Keep the table wide inside the scrollable container */
-  .head-row,
+  .recent-container h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    position: sticky;
+    left: 0;
+  }
+  .head-row {
+    width: 700px;
+    display: flex;
+    gap: 95px;
+    padding-left: 15px;
+    height: 40px;
+  }
+  .head-row h6 {
+    font-size: 16px;
+  }
   .row-content {
-    min-width: 1050px; /* Forces scrollbar instead of squishing columns */
+    width: 700px;
+    height: 55px;
+    padding-left: 15px;
+    margin-top: 15px;
+    grid-template-columns: 100px 140px 165px 138px 100px;
+  }
+  .row-content p,
+  .row-content button {
+    white-space: nowrap;
+  }
+  .row-content p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 821px) and (max-width: 1024px) {
+  .mobile-head {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 200;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-header);
+    display: block;
+    padding: 30px 80px;
+  }
+  .mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .mobile-logo {
+    width: 150px;
+  }
+  .toggle {
+    margin-left: 570px;
+  }
+  .outer-circle-container {
+    position: relative;
+    width: 50px;
+    height: 32px;
+  }
+  .inner-circle {
+    width: 28.82px;
+    height: 28.52px;
+  }
+  .mobile-logo-img,
+  .close {
     width: 100%;
   }
+  .menu-icon {
+    background: none;
+    border: none;
+  }
+  .close-icon {
+    width: 40px;
+    height: 28px;
+    display: none;
+    background: none;
+    border: none;
+    /* margin-right: -50px; */
+    margin-top: -20px;
+  }
+  .mobile-navbar {
+    display: flex;
+    align-items: center;
+  }
+  .mobile-navbar.open .menu-icon {
+    display: none;
+  }
+  .mobile-navbar.open .close-icon {
+    display: block;
+  }
+  .mobile-nav-content {
+    opacity: 0;
+    max-height: 0px;
+    pointer-events: 0;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-ui);
+    /* justify-content: center;
+    align-items: center; */
+    padding-left: 45px;
+    padding-bottom: 50px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: var(--bg-body);
+    width: 30%;
+    transform: translateY(-8px);
+    transition:
+      max-height 300ms ease,
+      opacity 300ms ease,
+      transform 300ms ease;
+    z-index: 100;
+  }
+  .mobile-nav-content.open {
+    max-height: 1000px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-nav-content::-webkit-scrollbar {
+    display: none;
+  }
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    padding-left: 24px;
+    gap: 34px;
+  }
+
+  .navbar-one,
+  .navbar-two {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .dash {
+    margin-left: 8px;
+    margin-bottom: 20px;
+  }
+  .navbar-one:first-child {
+    width: 0;
+    background-color: none;
+    border: none;
+    height: 0px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    padding-left: 0px;
+  }
+  .dashboard-icon,
+  .account-icon,
+  .deposit-icon,
+  .withdraw-icon,
+  .invoice-icon,
+  .support-icon {
+    width: 17px;
+  }
+  .wallet-icon {
+    width: 17px;
+    height: 17px;
+  }
+  .transaction-icon {
+    width: 17px;
+    height: 17px;
+  }
+  .funds-icon {
+    width: 16px;
+    height: 21px;
+  }
+  .account-arrow {
+    margin-left: 5px;
+    margin-top: 3px;
+  }
+  .deposit-arrow {
+    margin-left: 38px;
+  }
+  .withdraw-arrow {
+    margin-left: 26px;
+  }
+  .invoice-arrow {
+    margin-left: 45px;
+  }
+  .arrow-right {
+    width: 14px;
+    height: 14px;
+  }
+  .navbar-one h5,
+  .navbar-two h5 {
+    font-size: 17px;
+  }
+  .dash-text {
+    color: #7ac231;
+  }
+  .merchant {
+    font-weight: 600;
+    font-style: bold;
+    font-size: 11px;
+    margin-top: 20px;
+  }
+  .developer-section {
+    margin-top: -15px;
+  }
+  .developer-icon {
+    width: 15px;
+    height: 7px;
+  }
+  .dev-arrow-down {
+    margin-left: 20px;
+    width: 14px;
+    height: 14px;
+  }
+  .dev-dropdown {
+    margin-left: 38px;
+  }
+  .dev-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 8px;
+  }
+  .ellipse {
+    width: 4px;
+    height: 4px;
+  }
+  .dev-list p {
+    font-size: 11px;
+  }
+  .sidebar-square {
+    display: none;
+  }
+  .desktop-header {
+    display: none;
+  }
+  .mobile-second-header {
+    padding-top: 40px;
+    opacity: 1;
+  }
+  .first-mobile-area {
+    display: flex;
+  }
+  .toggle-section {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 16%;
+  }
+  .searchbar {
+    width: 28px;
+  }
+  .search-input {
+    height: 50px;
+    width: 130px;
+    font-size: 16px;
+    border: none;
+  }
+  .search-input::placeholder {
+    font-size: 16px;
+  }
+  .notification-section {
+    width: 48px;
+    height: 48px;
+  }
+  .notification-container {
+    width: 34px;
+    height: 34px;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .profile-img {
+    width: 52px;
+    height: 52px;
+  }
+  .username-section {
+    width: 90%;
+  }
+  .username-section p {
+    font-size: 19px;
+  }
+  .username-section h1 {
+    font-size: 34px;
+  }
+  .search-section {
+    width: 376px;
+    margin-top: 16px;
+    border: 2px solid #f5f5f5;
+  }
+
+  main {
+    margin-top: 270px;
+    margin-left: 11.5%;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+  }
+  .first-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .payment-history {
+    display: flex;
+    gap: 24px;
+  }
+  .total-invoice {
+    width: 385px;
+    height: 140px;
+    padding: 15px 0 20px 45px;
+  }
+  .monthly-chart {
+    padding: 25px 10px 15px 70px;
+    margin-top: 30px;
+    width: 800px;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid var(--border-ui);
+  }
+  .monthly-view {
+    display: flex;
+    align-items: center;
+    gap: 440px;
+  }
+  .first-right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .balance-section {
+    display: none;
+  }
+  .mobile-balance-section {
+    width: 800px;
+    height: 210px;
+    border-radius: 20px;
+    background: linear-gradient(101.43deg, #03d17a -0.53%, #afed09 97.73%);
+    display: flex;
+    align-items: center;
+    gap: 400px;
+    padding-left: 62px;
+    margin-top: 30px;
+  }
+  .transactions-section {
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 62px;
+    width: 800px;
+    height: 210px;
+  }
+  .withdrawal-history {
+    gap: 440px;
+  }
+  .transactions-line {
+    width: 650px;
+  }
+  .deposit-history {
+    display: flex;
+    align-items: center;
+    gap: 410px;
+  }
+  .recent-container {
+    padding: 30px 15px;
+    margin-top: 25px;
+    width: 800px;
+    min-height: 362px;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .recent-container h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    position: sticky;
+    left: 0;
+  }
+  .head-row {
+    width: 760px;
+    display: flex;
+    gap: 113px;
+    padding-left: 25px;
+    height: 40px;
+  }
+  .head-row h6 {
+    font-size: 16px;
+  }
+  .row-content {
+    width: 760px;
+    height: 55px;
+    padding-left: 25px;
+    margin-top: 15px;
+    grid-template-columns: 125px 150px 190px 150px 100px;
+  }
+  .row-content p,
+  .row-content button {
+    white-space: nowrap;
+  }
+  .row-content p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1680px) {
+  .desktop-header {
+    margin-left: 16%;
+    padding-left: 7.5%;
+    width: 1280px;
+  }
+  .username-section {
+    width: 46%;
+  }
+  .navbar {
+    gap: 34px;
+  }
+  .logo {
+    margin-left: 75px;
+  }
+  .logo-img {
+    width: 100%;
+  }
+  .dash {
+    margin-left: 26px;
+  }
+  .navbar-one:first-child {
+    width: 220px;
+  }
+  .navbar-one,
+  .navbar-two {
+    gap: 30px;
+    padding-left: 16px;
+  }
+  main {
+    margin-left: 23.5%;
+  }
+  .first-section {
+    display: flex;
+    gap: 120px;
+  }
+  .recent-container {
+    width: 1150px;
+  }
+  .head-row {
+    width: 1100px;
+  }
+  .row-content {
+    width: 1100px;
+  }
+}
+
+@media screen and (min-width: 1681px) and (max-width: 1920px) {
+  .desktop-header {
+    margin-left: 16%;
+    padding-left: 9%;
+    width: 1430px;
+  }
+  .username-section {
+    width: 48%;
+  }
+  .navbar {
+    gap: 34px;
+    padding-left: 42px;
+  }
+  .logo {
+    margin-left: 75px;
+  }
+  .logo-img {
+    width: 100%;
+  }
+  .navbar-one,
+  .navbar-two {
+    gap: 42px;
+  }
+
+  .dash {
+    margin-left: 26px;
+  }
+  .navbar-one:first-child {
+    width: 245px;
+  }
+  main {
+    margin-left: 25%;
+  }
+  .first-section {
+    display: flex;
+    gap: 150px;
+  }
+  .total-invoice {
+    gap: 10px;
+    width: 300px;
+  }
+  .monthly-chart {
+    padding: 25px 10px 15px 45px;
+    width: 640px;
+  }
+  .balance-section {
+    width: 465px;
+  }
+  .transactions-section {
+    width: 465px;
+  }
+  .transactions-line {
+    width: 420px;
+  }
+  .recent-container {
+    width: 1255px;
+    padding-left: 45px;
+  }
+  .head-row {
+    width: 1160px;
+    gap: 208px;
+  }
+  .row-content {
+    width: 1160px;
+    grid-template-columns: 220px 255px 285px 238px 100px;
+  }
+
+  /* .recent-container {
+  padding-left: 25px;
+  padding-top: 30px;
+  margin-top: 25px;
+  width: 1110px;
+  height: 432px;
+  border-radius: 10px;
+  border: 1px solid var(--border-ui);
+}
+.recent-container h3 {
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--text-main);
+}
+.head-row {
+  display: flex;
+  align-items: center;
+  gap: 188px;
+  padding-left: 30px;
+  margin-top: 20px;
+  width: 1060px;
+  height: 50px;
+  border-radius: 3px;
+  background-color: var(--row-bg);
+}
+.head-row h6 {
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--headrow-cl);
+}
+.row-content {
+  width: 1060px;
+  height: 55px;
+  align-items: center;
+  border-radius: 3px;
+  background-color: var(--row-bg);
+  padding-left: 30px;
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 200px 235px 265px 218px 100px;
+}
+.row-content p {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--row-cl);
+} */
 }
