@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Sign up page</title>
+    <link rel="stylesheet" href="./login.css" />
+    <script
+      src="https://kit.fontawesome.com/fc4bc3f2a4.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=check_circle" /> -->
+  </head>
+  <body>
+    <header class="desktop-header">
+      <div class="logo">
+        <img
+          src="./images/logo.png"
+          class="logo-img light-only"
+          alt="page logo"
+        />
+        <img
+          src="./images/dark-logo.png"
+          class="logo-img dark-only"
+          alt="page logo"
+        />
+      </div>
+
+      <div class="toggle-section" style="cursor: pointer">
+        <img
+          src="./images/bright-1.png"
+          class="brightness-icon light-only"
+          alt="Brightness icon"
+        />
+        <img
+          src="./images/bright-2.png"
+          class="brightness-icon dark-only"
+          alt="Brightness icon"
+        />
+        <div class="toggle theme-toggle">
+          <div class="outer-circle-container">
+            <div class="outer-circle"></div>
+
+            <div class="inner-circle"></div>
+          </div>
+        </div>
+        <img
+          src="./images/focus.png"
+          class="focus-icon light-only"
+          alt="focus mode icon"
+        />
+        <img
+          src="./images/focus-1.png"
+          class="focus-icon dark-only"
+          alt="focus mode icon"
+        />
+      </div>
+      <div class="last-section">
+        <div class="user-auth">
+          <button type="button" class="login-btn-modal">Login</button>
+        </div>
+      </div>
+    </header>
+    <div class="alert-box">
+      <div class="alert success">
+        <i class="fa-solid fa-circle-check"></i>
+        <!-- <img
+          src="./images/checked.svg"
+          class="alert-img"
+          light-only
+          alt="alert icon"
+        />
+        <img
+          src="./images/checked-1.svg"
+          class="alert-img"
+          dark-only
+          alt="alert icon"
+        /> -->
+        <span>Registration Successful</span>
+      </div>
+    </div>
+
+    <div class="auth-modal">
+      <button class="close-btn-modal">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <!-- <button type="button" class="close-modal">
+          <img
+            src="./images/close-icon.png"
+            class="closed-img light-only"
+            alt="closed icon"
+          />
+          <img
+            src="./images/close-1.png"
+            class="closed-img dark-only"
+            alt="closed icon"
+          />
+        </button> -->
+      </button>
+      <div class="form-box login">
+        <h2>Login</h2>
+        <form action="">
+          <div class="input-box">
+            <input type="email" name="email" placeholder="Email" required />
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <!-- <img
+              src="./images/mail.svg"
+              class="mail-img light-only"
+              alt="email icon"
+            />
+            <img
+              src="./images/mail-1.svg"
+              class="mail-img dark-only"
+              alt="email icon"
+            /> -->
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <i class="fa fa-lock" aria-hidden="true"></i>
+            <!-- <img
+              src="./images/lock.svg"
+              class="lock-img light-only"
+              alt="password icon"
+            />
+            <img
+              src="./images/lock-1.svg"
+              class="lock-img dark-only"
+              alt="password icon"
+            /> -->
+          </div>
+          <button type="submit" name="login-btn" class="btn">Login</button>
+          <p>
+            Don't have an account?
+            <a href="#" class="register-link"> Sign Up</a>
+          </p>
+        </form>
+      </div>
+      <div class="form-box register">
+        <h2>Sign Up</h2>
+        <form action="">
+          <div class="input-box">
+            <input type="text" name="name" placeholder="Name" required />
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <!-- <img
+              src="./images/user.svg"
+              class="user-img dark-only"
+              alt="user icon"
+            />
+            <img
+              src="./images/user-1.svg"
+              class="user-img light-only"
+              alt="user icon"
+            /> -->
+          </div>
+          <div class="input-box">
+            <input type="email" name="email" placeholder="Email" required />
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <!-- <img
+              src="./images/mail.svg"
+              class="mail-img light-only"
+              alt="email icon"
+            />
+            <img
+              src="./images/mail-1.svg"
+              class="mail-img dark-only"
+              alt="email icon"
+            /> -->
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <i class="fa fa-lock" aria-hidden="true"></i>
+            <!-- <img
+              src="./images/lock.svg"
+              class="lock-img light-only"
+              alt="password icon"
+            />
+            <img
+              src="./images/lock-1.svg"
+              class="lock-img dark-only"
+              alt="password icon"
+            /> -->
+          </div>
+          <button type="submit" name="register-btn" class="btn">Sign Up</button>
+          <p>
+            Already have an account?
+            <a href="#" class="login-link"> Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

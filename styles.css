@@ -29,16 +29,8 @@
   --row-bg: #eaf6d87a;
   --headrow-cl: #04b76b;
   --row-cl: #02000a;
-  --cancel-bg: #f9e1e1;
-  --cancel-cl: #e60000;
-  --paid-bg: #dbfae7;
-  --paid-cl: #16c35b;
-  --overdue-bg: #ff99001a;
-  --overdue-cl: #ff9900;
-  --unpaid-bg: #7000ff1a;
-  --unpaid-cl: #7000ff;
+  --cancel-cl: #e80000;
   --navbar-cl: #02000a;
-  /* --bg-mobile-nav-content: #000614; */
 }
 
 [data-theme="dark"] {
@@ -65,16 +57,9 @@
   --row-bg: #edf8d214;
   --headrow-cl: #7ac231;
   --row-cl: #bfbfbf;
-  --cancel-bg: #271616;
+
   --cancel-cl: #e90808;
-  --paid-bg: #0d231a;
-  --paid-cl: #20df6c;
-  --overdue-bg: #ff990026;
-  --overdue-cl: #ff9900;
-  --unpaid-bg: #7000ff26;
-  --unpaid-cl: #7000ff;
   --navbar-cl: #9b9b9b;
-  /* --bg-mobile-nav-content: #ffffff; */
 }
 
 body {
@@ -371,9 +356,19 @@ body {
   margin-left: 30px;
   width: 16px;
   height: 16px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.dev-arrow-down.rotate {
+  transform: rotate(90deg);
 }
 .dev-dropdown {
   margin-left: 38px;
+  display: none;
+  transition: all 0.3s ease;
+}
+.dev-dropdown.active {
+  display: block;
 }
 .dev-list {
   display: flex;
@@ -871,7 +866,7 @@ main {
 .deposit-history {
   display: flex;
   align-items: center;
-  gap: 119px;
+  gap: 112px;
 }
 .withdrawal {
   display: flex;
@@ -942,12 +937,12 @@ main {
   height: 28px;
   border: none;
   border-radius: 5px;
-  background-color: #f9e1e1;
-  color: #e60000;
+  background-color: #e9080815;
+  color: var(--cancel-cl);
 }
 .paid {
-  color: #16c35b;
-  background-color: #dbfae7;
+  background-color: #04b76c22;
+  color: #04b76b;
   font-weight: 530;
   font-size: 14px;
   width: 89px;
@@ -1009,7 +1004,7 @@ main {
     width: 130px;
   }
   .toggle {
-    margin-left: 120px;
+    margin-left: 100px;
   }
 
   .mobile-logo-img,
@@ -1063,10 +1058,11 @@ main {
     z-index: 100;
   }
   .mobile-nav-content.open {
-    max-height: 1000px;
+    max-height: calc(100vh - 100px);
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
+    overflow-y: auto;
   }
   .desktop-nav {
     display: none;
@@ -1201,7 +1197,7 @@ main {
     font-size: 30px;
   }
   .search-section {
-    width: 368px;
+    width: 328px;
     margin-top: 10px;
     border: 2px solid #f5f5f5;
   }
@@ -1210,7 +1206,10 @@ main {
   }
 
   main {
-    margin: 260px 20px 50px;
+    margin-right: 20px;
+    margin-left: 15px;
+    margin-top: 260px;
+    margin-bottom: 50px;
   }
   .first-section {
     display: flex;
@@ -2293,164 +2292,662 @@ main {
   }
 }
 
-@media screen and (min-width: 1680px) {
+@media screen and (min-width: 1442px) and (max-width: 1680px) {
   .desktop-header {
-    margin-left: 16%;
-    padding-left: 7.5%;
-    width: 1280px;
+    width: calc(1350px - 1.8%);
   }
   .username-section {
     width: 46%;
   }
-  .navbar {
-    gap: 34px;
+  .username-section p {
+    font-size: 22px;
+  }
+  .username-section h1 {
+    font-size: 38px;
+  }
+  .brightness-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .outer-circle-container {
+    width: 49px;
+    height: 31px;
+  }
+  .inner-circle {
+    width: 28.82px;
+    height: 28.52px;
+  }
+  .focus-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .search-section {
+    height: 50px;
+    width: 200px;
+  }
+  .searchbar {
+    width: 28px;
+  }
+  .search-input {
+    height: 30px;
+    width: 150px;
+    font-size: 16px;
+  }
+  .search-input::placeholder {
+    font-size: 16px;
+  }
+  .notification-section {
+    width: 44px;
+    height: 44px;
+  }
+  .notification-container {
+    width: 32px;
+    height: 32px;
+  }
+  .notification-count {
+    width: 12px;
+    height: 12px;
+  }
+  .profile-img {
+    width: 46px;
+    height: 46px;
+  }
+  .profile-title h6 {
+    font-size: 14px;
+  }
+  .profile-title p {
+    font-size: 14px;
+  }
+  .arrow-down {
+    width: 20px;
+    height: 20px;
   }
   .logo {
-    margin-left: 75px;
-  }
-  .logo-img {
-    width: 100%;
+    width: 160px;
   }
   .dash {
-    margin-left: 26px;
+    margin-left: 16px;
   }
   .navbar-one:first-child {
-    width: 220px;
+    width: 210px;
+    height: 50px;
   }
-  .navbar-one,
-  .navbar-two {
-    gap: 30px;
-    padding-left: 16px;
+  .dashboard-icon,
+  .account-icon,
+  .deposit-icon,
+  .withdraw-icon,
+  .invoice-icon,
+  .support-icon {
+    width: 24px;
   }
-  main {
-    margin-left: 23.5%;
+  .wallet-icon {
+    width: 24px;
+    height: 24px;
   }
-  .first-section {
+  .transaction-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .funds-icon {
+    width: 28px;
+    height: 29px;
+  }
+  .account-arrow {
+    margin-left: 15px;
+    margin-top: 3px;
+  }
+  .deposit-arrow {
+    margin-left: 60px;
+  }
+  .withdraw-arrow {
+    margin-left: 43px;
+  }
+  .invoice-arrow {
+    margin-left: 70px;
+  }
+  .arrow-right {
+    width: 20px;
+    height: 20px;
+  }
+  .navbar-one h5,
+  .navbar-two h5 {
+    font-size: 22px;
+  }
+  .merchant {
+    font-size: 17px;
+  }
+  .developer-icon {
+    width: 22px;
+    height: 14px;
+  }
+  .dev-arrow-down {
+    margin-left: 40px;
+    width: 20px;
+    height: 20px;
+  }
+  .dev-dropdown {
+    margin-left: 38px;
+  }
+
+  .ellipse {
+    width: 10px;
+    height: 10px;
+  }
+  .dev-list p {
+    font-size: 16px;
+  }
+  .dev-arrow-down {
+    width: 20px;
+    height: 20px;
+  }
+  .sidebar-square {
+    width: 200px;
+    height: 200px;
+  }
+  .square-text h3 {
+    font-size: 28px;
+  }
+  .square-text h6 {
+    font-size: 17px;
+  }
+  .square-text p {
+    font-size: 15px;
+  }
+  .total-invoice {
+    width: 330px;
+    height: 155px;
+  }
+  .invoice-head {
+    font-size: 20px;
+  }
+  .naira {
+    font-size: 24px;
+  }
+  .amount {
+    font-size: 34px;
+  }
+  .lastweek-invoice {
+    width: 240px;
+    height: 40px;
+  }
+  .lastweek-payment {
+    width: 260px;
+    height: 36px;
+  }
+  .invoice-percent {
+    font-size: 16px;
+  }
+  .red-arrow {
+    width: 13px;
+    height: 13px;
+  }
+  .invoice-text {
+    font-size: 17px;
+  }
+  .monthly-chart {
+    padding: 25px 10px 15px 50px;
+    height: 300px;
+    width: 700px;
+  }
+  .monthly-view {
+    gap: 330px;
+  }
+  .monthly-view h6 {
+    font-size: 22px;
+  }
+  .calendar {
+    width: 140px;
+    height: 36px;
+  }
+  .calendar p {
+    font-size: 15px;
+  }
+  .calendar-icon {
+    width: 12.23px;
+    height: 13.38px;
+  }
+  .calendar-dropdown li {
+    font-size: 15px;
+  }
+  .platform {
+    font-size: 16px;
+  }
+  .chart {
     display: flex;
-    gap: 120px;
+    align-items: center;
+    gap: 46px;
+  }
+  .income-bar p {
+    font-size: 19px;
+  }
+  .single-bar p {
+    font-size: 12px;
+  }
+  .earn {
+    gap: 4px;
+    width: 53px;
+    height: 34.08px;
+  }
+
+  .earn p {
+    font-size: 9px;
+  }
+
+  .first-right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .balance-section {
+    width: 470px;
+    height: 220px;
+  }
+  .bal-inner-circle {
+    width: 50px;
+    height: 32px;
+  }
+  .bal-outer-circle {
+    width: 28.82px;
+    height: 28.52px;
+  }
+  .right-balance h2 {
+    font-size: 44px;
+  }
+  .right-balance h5 {
+    font-size: 22px;
+  }
+  .right-balance p {
+    font-size: 20px;
+  }
+  .left-balance {
+    gap: 4px;
+  }
+  .round-circle {
+    width: 11px;
+    height: 11px;
+    border-radius: 5px;
+  }
+  .transactions-section {
+    width: 470px;
+    height: 220x;
+  }
+  .withdrawal-history {
+    gap: 135px;
+  }
+  .transactions-line {
+    width: 399px;
+  }
+  .deposit-history {
+    gap: 113px;
+  }
+  .withdrawal p {
+    font-size: 18px;
+  }
+  .withdrawal h3 {
+    font-size: 34px;
+  }
+  .withdrawal-arrow {
+    width: 70px;
   }
   .recent-container {
-    width: 1150px;
+    padding-left: 25px;
+    padding-top: 30px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    width: 1250px;
+    height: 432px;
+  }
+  .recent-container h3 {
+    font-size: 32px;
   }
   .head-row {
-    width: 1100px;
+    gap: 198px;
+    margin-top: 20px;
+    width: 1200px;
+    height: 50px;
+  }
+  .head-row h6 {
+    font-size: 22px;
   }
   .row-content {
-    width: 1100px;
+    width: 1200px;
+    height: 55px;
+    grid-template-columns: 210px 260px 290px 260px 100px;
+  }
+  .row-content p {
+    font-size: 19px;
+  }
+  .cancel,
+  .paid,
+  .overdue,
+  .unpaid {
+    font-size: 19px;
+    width: 110px;
+    height: 35px;
   }
 }
 
 @media screen and (min-width: 1681px) and (max-width: 1920px) {
   .desktop-header {
-    margin-left: 16%;
-    padding-left: 9%;
-    width: 1430px;
+    width: calc(1550px - 1.8%);
+    padding-top: 10px;
+    height: 100px;
   }
   .username-section {
-    width: 48%;
+    width: 47%;
+  }
+  .username-section p {
+    font-size: 26px;
+  }
+  .username-section h1 {
+    font-size: 44px;
+  }
+  .brightness-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .outer-circle-container {
+    width: 55px;
+    height: 35px;
+  }
+  .inner-circle {
+    width: 32.82px;
+    height: 32.52px;
+  }
+  .focus-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .search-section {
+    height: 56px;
+    width: 210px;
+  }
+  .searchbar {
+    width: 32px;
+  }
+  .search-input {
+    height: 34px;
+    width: 156px;
+    font-size: 20px;
+  }
+  .search-input::placeholder {
+    font-size: 18px;
+  }
+  .notification-section {
+    width: 48px;
+    height: 48px;
+  }
+  .notification-container {
+    width: 32px;
+    height: 32px;
+  }
+  .notification-count {
+    width: 16px;
+    height: 16px;
+  }
+  .profile-img {
+    width: 50px;
+    height: 50px;
+  }
+  .profile-title h6 {
+    font-size: 18px;
+  }
+  .profile-title p {
+    font-size: 18px;
+  }
+  .arrow-down {
+    width: 20px;
+    height: 20px;
   }
   .navbar {
+    padding-left: 36px;
     gap: 34px;
-    padding-left: 42px;
+    /* padding-top: 50px; */
   }
   .logo {
-    margin-left: 75px;
+    width: 180px;
+    margin-top: 40px;
   }
-  .logo-img {
-    width: 100%;
-  }
-  .navbar-one,
-  .navbar-two {
-    gap: 42px;
-  }
-
   .dash {
-    margin-left: 26px;
+    margin-left: 22px;
+    padding-top: 40px;
   }
   .navbar-one:first-child {
-    width: 245px;
+    width: 216px;
+    height: 56px;
+  }
+  .dashboard-icon,
+  .account-icon,
+  .deposit-icon,
+  .withdraw-icon,
+  .invoice-icon,
+  .support-icon {
+    width: 30px;
+  }
+  .wallet-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .transaction-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .funds-icon {
+    width: 34px;
+    height: 35px;
+  }
+  .account-arrow {
+    margin-left: 25px;
+    margin-top: 3px;
+  }
+  .deposit-arrow {
+    margin-left: 70px;
+  }
+  .withdraw-arrow {
+    margin-left: 53px;
+  }
+  .invoice-arrow {
+    margin-left: 79px;
+  }
+  .arrow-right {
+    width: 23px;
+    height: 23px;
+  }
+  .navbar-one h5,
+  .navbar-two h5 {
+    font-size: 25px;
+  }
+  .merchant {
+    font-size: 21px;
+  }
+  .developer-icon {
+    width: 22px;
+    height: 14px;
+  }
+  .dev-arrow-down {
+    margin-left: 55px;
+    width: 23px;
+    height: 23px;
+  }
+  .ellipse {
+    width: 12px;
+    height: 12px;
+  }
+  .dev-list p {
+    font-size: 18px;
+  }
+  .sidebar-square {
+    width: 230px;
+    height: 220px;
+  }
+  .square-text h3 {
+    font-size: 31px;
+  }
+  .square-text h6 {
+    font-size: 21px;
+  }
+  .square-text p {
+    font-size: 17px;
   }
   main {
-    margin-left: 25%;
-  }
-  .first-section {
-    display: flex;
-    gap: 150px;
+    margin-top: 150px;
   }
   .total-invoice {
-    gap: 10px;
-    width: 300px;
+    width: 380px;
+    height: 160px;
+  }
+  .invoice-head {
+    font-size: 24px;
+  }
+  .naira {
+    font-size: 28px;
+  }
+  .amount {
+    font-size: 38px;
+  }
+  .lastweek-invoice {
+    width: 290px;
+  }
+  .lastweek-payment {
+    width: 310px;
+  }
+  .invoice-percent {
+    font-size: 20px;
+  }
+  .red-arrow {
+    width: 15px;
+    height: 15px;
+  }
+  .invoice-text {
+    font-size: 21px;
   }
   .monthly-chart {
-    padding: 25px 10px 15px 45px;
-    width: 640px;
+    padding: 25px 10px 15px 50px;
+    height: 310px;
+    width: 800px;
+  }
+  .monthly-view {
+    gap: 400px;
+  }
+  .monthly-view h6 {
+    font-size: 24px;
+  }
+  .calendar {
+    width: 160px;
+    height: 40px;
+  }
+  .calendar p {
+    font-size: 18px;
+  }
+  .calendar-icon {
+    width: 14.23px;
+    height: 15.38px;
+  }
+  .calendar-dropdown li {
+    font-size: 16px;
+  }
+  .platform {
+    font-size: 20px;
+  }
+  .chart {
+    gap: 56px;
+  }
+  .income-bar p {
+    font-size: 22px;
+  }
+  .single-bar p {
+    font-size: 15px;
+  }
+  .earn {
+    gap: 6px;
+    width: 60px;
+    height: 38.08px;
+  }
+  .earn p {
+    font-size: 11px;
+  }
+  .first-right-section {
+    gap: 32px;
   }
   .balance-section {
-    width: 465px;
+    width: 550px;
+    height: 230px;
+    gap: 110px;
+  }
+  .right-balance h2 {
+    font-size: 48px;
+  }
+  .right-balance h5 {
+    font-size: 26px;
+  }
+  .right-balance p {
+    font-size: 24px;
+  }
+  .left-balance {
+    gap: 4px;
+  }
+  .round-circle {
+    width: 11px;
+    height: 11px;
+    border-radius: 5px;
   }
   .transactions-section {
-    width: 465px;
+    width: 550px;
+    height: 230px;
+  }
+  .withdrawal-history {
+    gap: 215px;
+    padding-left: 42px;
   }
   .transactions-line {
-    width: 420px;
+    width: 470px;
+  }
+  .deposit-history {
+    gap: 193px;
+    padding-left: 42px;
+  }
+  .withdrawal p {
+    font-size: 22px;
+  }
+  .withdrawal h3 {
+    font-size: 38px;
+  }
+  .withdrawal-arrow {
+    width: 76px;
   }
   .recent-container {
-    width: 1255px;
-    padding-left: 45px;
+    padding-left: 25px;
+    padding-top: 30px;
+    margin-top: 25px;
+    margin-bottom: 100px;
+    width: 1430px;
+    height: 530px;
+  }
+  .recent-container h3 {
+    font-size: 36px;
   }
   .head-row {
-    width: 1160px;
-    gap: 208px;
+    gap: 220px;
+    width: 1370px;
+    height: 70px;
+  }
+  .head-row h6 {
+    font-size: 25px;
   }
   .row-content {
-    width: 1160px;
-    grid-template-columns: 220px 255px 285px 238px 100px;
+    width: 1370px;
+    height: 70px;
+    grid-template-columns: 220px 300px 330px 290px 100px;
   }
-
-  /* .recent-container {
-  padding-left: 25px;
-  padding-top: 30px;
-  margin-top: 25px;
-  width: 1110px;
-  height: 432px;
-  border-radius: 10px;
-  border: 1px solid var(--border-ui);
-}
-.recent-container h3 {
-  font-weight: 600;
-  font-size: 28px;
-  color: var(--text-main);
-}
-.head-row {
-  display: flex;
-  align-items: center;
-  gap: 188px;
-  padding-left: 30px;
-  margin-top: 20px;
-  width: 1060px;
-  height: 50px;
-  border-radius: 3px;
-  background-color: var(--row-bg);
-}
-.head-row h6 {
-  font-weight: 500;
-  font-size: 18px;
-  color: var(--headrow-cl);
-}
-.row-content {
-  width: 1060px;
-  height: 55px;
-  align-items: center;
-  border-radius: 3px;
-  background-color: var(--row-bg);
-  padding-left: 30px;
-  margin-top: 15px;
-  display: grid;
-  grid-template-columns: 200px 235px 265px 218px 100px;
-}
-.row-content p {
-  font-weight: 500;
-  font-size: 14px;
-  color: var(--row-cl);
-} */
+  .row-content p {
+    font-size: 22px;
+  }
+  .cancel,
+  .paid,
+  .overdue,
+  .unpaid {
+    font-size: 22px;
+    width: 130px;
+    height: 40px;
+  }
 }

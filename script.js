@@ -1,4 +1,23 @@
+//Js for Login page
 
+const authModal = document.querySelector('.auth-modal');
+const loginLink = document.querySelector('.login-link');
+const registerlink = document.querySelector('.register-link');
+const loginBtnModal = document.querySelector('.login-btn-modal');
+const closeBtnModal = document.querySelector('.close-btn-modal');
+const alertBox = document.querySelector('.alert-box');
+
+registerlink.addEventListener('click', () => authModal.classList.add('slide'));
+loginLink.addEventListener('click', () => authModal.classList.remove('slide'));
+loginBtnModal.addEventListener('click', () => authModal.classList.add('show'));
+closeBtnModal.addEventListener('click', () => authModal.classList.remove('show', 'slide'));
+
+setTimeout(() => alertBox.classList.add('show'), 50);
+
+setTimeout(() => {
+    alertBox.classList.remove('show');
+    setTimeout(() => alertBox.remove(), 1000);  
+}, 6000);
 
 // 1. Select ALL elements with the class 'theme-toggle'
 const themeToggles = document.querySelectorAll('.theme-toggle');
@@ -136,7 +155,32 @@ chartBars.forEach(bar => {
 // Initial load
 updateChart("May");
 
+// Js for developer dropdown
 
+// 1. Grab the elements by their new IDs
+const lightArrow = document.getElementById('arrow-light');
+const darkArrow = document.getElementById('arrow-dark');
+const devMenu = document.getElementById('dev-menu');
+
+// 2. Create a small "Helper Recipe" to handle the toggle
+function toggleDevMenu() {
+    console.log("Toggle triggered!"); 
+    devMenu.classList.toggle('active');
+
+    // 2. Rotate the arrows
+    if (lightArrow) lightArrow.classList.toggle('rotate');
+    if (darkArrow) darkArrow.classList.toggle('rotate');
+}
+
+// 3. Attach the listener to the Light Arrow (if it exists)
+if (lightArrow) {
+    lightArrow.addEventListener('click', toggleDevMenu);
+}
+
+// 4. Attach the listener to the Dark Arrow (if it exists)
+if (darkArrow) {
+    darkArrow.addEventListener('click', toggleDevMenu);
+}
 
 
 // js for mobile navbar
@@ -155,3 +199,4 @@ closeBtn.addEventListener("click", () => {
   mobileNav.classList.remove('open');
   menuContent.classList.remove('open');
 });
+
