@@ -82,7 +82,7 @@ body {
   left: 0;
   right: 0;
   width: 100%;
-  padding: 20px 100px;
+  padding: 20px 40px;
   background: var(--bg-header);
   display: flex;
   align-items: center;
@@ -91,70 +91,10 @@ body {
 }
 .logo {
   width: 150px;
-  /* margin-right: auto; */
 }
 .logo-img {
   width: 100%;
 }
-/* .toggle-section {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  width: 16%;
-}
-.brightness-icon {
-  width: 18px;
-  height: 18px;
-}
-.outer-circle-container {
-  position: relative;
-  width: 45px;
-  height: 27px;
-}
-.outer-circle {
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  background-color: var(--toggle-bg);
-  transition: background-color 0.3s ease;
-}
-.inner-circle {
-  position: absolute;
-  top: 1.74px;
-  left: 1.76px;
-  width: 23.82px;
-  height: 23.52px;
-  border-radius: 16px;
-  background: var(--inner-circle);
-  transition:
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.3s;
-}
-[data-theme="dark"] .inner-circle {
-  transform: translateX(18px);
-}
-.focus-icon {
-  width: 18px;
-  height: 18px;
-} */
-/* .user-auth .login-btn-modal {
-  height: 40px;
-  padding: 0 35px;
-  background: transparent;
-  border-radius: 40px;
-  border: 1px solid var(--text-main);
-  font-size: 16px;
-  color: var(--text-main);
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.5s;
-}
-.user-auth .login-btn-modal:hover {
-  background: #7c797993;
-  color: var(--toggle-bg);
-  font-weight: 700;
-  border: none;
-} */
 .auth-modal {
   position: fixed;
   width: 420px;
@@ -170,12 +110,7 @@ body {
   align-items: center;
   overflow: hidden;
   transition: height 0.2s ease;
-  /* transform 0.5s ease; */
-  /* transform: scale(0); */
 }
-/* .auth-modal.show {
-  transform: scale(1);
-} */
 .auth-modal.slide {
   height: 520px;
 }
@@ -265,18 +200,18 @@ body {
 }
 .alert-box {
   position: fixed;
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%) translateY(calc(-100% - 35px)); /* Combine both transforms */
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-100% - 35px));
   top: 35px;
   min-width: 250px;
   max-width: 90%;
-  width: max-content; /* Shrinks to fit text exactly */
-  min-height: 60px; /* Minimum height for short messages */
-  height: auto; /* Allows it to grow for long messages */
+  width: max-content;
+  min-height: 60px;
+  height: auto;
   background: var(--navbar-cl);
   border-radius: 6px;
-  padding: 15px 20px; /* More vertical padding for multi-line text */
-  z-index: 1000; /* Ensure it stays on top of everything */
+  padding: 15px 20px;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,10 +219,8 @@ body {
   transition: transform 0.5s ease;
 }
 .alert-box.show {
-  /* Keep the horizontal center while moving it down */
   transform: translateX(-50%) translateY(0);
 }
-/* 1. Ensure the parent has 'relative' so the bar knows where to stick */
 .alert {
   position: relative;
   display: flex;
@@ -303,40 +236,44 @@ body {
   font-size: 18px;
 }
 
-/* 2. The Bar - Give it a clear starting state */
 .alert::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   height: 5px;
-  width: 0%; /* Start at zero */
+  width: 0%;
   background-color: var(--border-ui);
-  display: block; /* Force it to be an actual box */
+  display: block;
 }
-
-/* 3. The Trigger - Match this exactly to your JS class */
 .alert-box.show .alert::after {
   animation: progress 3s linear forwards;
 }
-/* Ensure the bar turns red when the 'error' class is added to the parent */
 .alert-box.error .alert::after {
-  background-color: #ff4d4d !important; /* Forces the red color */
+  background-color: #ff4d4d !important;
 }
-
-/* Optional: Make the text bold for errors */
 .alert-box.error span {
   color: #ff4d4d;
   font-weight: 700;
   line-height: 20px;
 }
-
-/* 4. The Story - From 100 to 0 */
 @keyframes progress {
   0% {
     width: 100%;
   }
   100% {
     width: 0%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .desktop-header {
+    padding: 20px 20px;
+  }
+  .logo {
+    width: 130px;
+  }
+  .auth-modal {
+    width: 90%;
   }
 }

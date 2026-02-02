@@ -1026,7 +1026,7 @@ main {
   opacity: 0;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 540px) {
   .mobile-head {
     position: fixed;
     top: 0;
@@ -1101,7 +1101,7 @@ main {
       max-height 300ms ease,
       opacity 300ms ease,
       transform 300ms ease;
-    z-index: 100;
+    z-index: 999;
   }
   .mobile-nav-content.open {
     max-height: calc(100vh - 100px);
@@ -1250,7 +1250,6 @@ main {
   .notification-section {
     position: relative;
   }
-
   main {
     margin-right: 20px;
     margin-left: 15px;
@@ -1574,7 +1573,7 @@ main {
     font-size: 12px;
   }
 }
-@media screen and (min-width: 481px) and (max-width: 820px) {
+@media screen and (min-width: 541px) and (max-width: 853px) {
   .mobile-head {
     position: fixed;
     top: 0;
@@ -1842,7 +1841,7 @@ main {
   }
 
   main {
-    margin: 270px 60px;
+    margin: 270px 50px;
   }
   .first-section {
     display: flex;
@@ -1853,7 +1852,7 @@ main {
     gap: 44px;
   }
   .total-invoice {
-    width: 680px;
+    width: 300px;
     height: 140px;
     padding: 15px 0 20px 45px;
   }
@@ -1958,7 +1957,7 @@ main {
   }
 }
 
-@media screen and (min-width: 821px) and (max-width: 1024px) {
+@media screen and (min-width: 854px) and (max-width: 1280px) {
   .mobile-head {
     position: fixed;
     top: 0;
@@ -2227,7 +2226,7 @@ main {
 
   main {
     margin-top: 270px;
-    margin-left: 11.5%;
+    margin-left: 6.5%;
     /* display: flex;
     flex-direction: column;
     align-items: center;

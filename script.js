@@ -274,14 +274,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. GREETING & NAME SYNC ---
     // We pull the data from the ACTIVE session
     const userData = JSON.parse(sessionData);
-    const greetingElement = document.getElementById('user-greeting'); 
+    // const greetingElement = document.getElementById('user-greeting'); 
+    const allGreetings = document.querySelectorAll ('.user-greeting-target');
     const allProfileNames = document.querySelectorAll('.profile-title h6');
 
     if (userData && userData.name) {
         const fullName = userData.name;
         const firstName = fullName.split(' ')[0];
 
-        if (greetingElement) greetingElement.textContent = `Hi ${firstName},`;
+        // 2. Loop through all greeting elements (Mobile + Desktop)
+        allGreetings.forEach(el => {
+            el.textContent = `Hi ${firstName},`;
+        });
+
+        // Update all profile names
         allProfileNames.forEach(el => el.textContent = fullName);
     }
 
