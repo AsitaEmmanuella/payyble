@@ -90,7 +90,7 @@ body {
   align-items: center;
   background-color: var(--bg-header);
   border-bottom: 1px solid var(--border-ui);
-  width: calc(1200px - 1.8%);
+  width: auto;
 }
 .username-section {
   width: 42.5%;
@@ -214,6 +214,10 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+  z-index: 200; /* Must be higher than the header's z-index */
+  cursor: pointer;
+  pointer-events: all; /* Explicitly tell the browser this is clickable */
 }
 .profile-img {
   width: 44px;
@@ -233,6 +237,38 @@ body {
 .arrow-down {
   width: 20px;
   height: 20px;
+  transition: transform 0.3s ease; /* Makes the spin smooth */
+}
+.profile-section.active .arrow-down {
+  transform: rotate(90deg);
+}
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  z-index: 300; /* The menu must be on top of the profile image */
+  top: 110%;
+  right: 0;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-ui);
+  border-radius: 8px;
+  list-style: none;
+  padding: 20px 20px;
+  width: 150px;
+  height: 150px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  row-gap: 20px;
+  flex-direction: column;
+}
+.profile-dropdown.active {
+  display: flex;
+}
+.profile-dropdown p {
+  font-size: 16px;
+  color: var(--text-main);
+  cursor: pointer;
+}
+.profile-dropdown p:hover {
+  color: var(--border-ui);
 }
 .desktop-nav {
   position: fixed;
@@ -280,6 +316,10 @@ body {
   align-items: center;
   gap: 20px;
 }
+/* .navbar-two {
+  position: relative;
+  z-index: 1000;
+} */
 .dash {
   margin-left: 12px;
   margin-bottom: 20px;
@@ -347,6 +387,9 @@ body {
 }
 .developer-section {
   margin-top: -15px;
+  cursor: pointer;
+  /* position: relative;
+  z-index: 999 !important; */
 }
 .developer-icon {
   width: 18px;
@@ -358,6 +401,9 @@ body {
   height: 16px;
   transition: transform 0.3s ease;
   cursor: pointer;
+  pointer-events: auto;
+  /* position: relative;
+  z-index: 10001; */
 }
 .dev-arrow-down.rotate {
   transform: rotate(90deg);

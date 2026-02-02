@@ -96,7 +96,7 @@ body {
 .logo-img {
   width: 100%;
 }
-.toggle-section {
+/* .toggle-section {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -136,8 +136,8 @@ body {
 .focus-icon {
   width: 18px;
   height: 18px;
-}
-.user-auth .login-btn-modal {
+} */
+/* .user-auth .login-btn-modal {
   height: 40px;
   padding: 0 35px;
   background: transparent;
@@ -154,7 +154,7 @@ body {
   color: var(--toggle-bg);
   font-weight: 700;
   border: none;
-}
+} */
 .auth-modal {
   position: fixed;
   width: 420px;
@@ -168,15 +168,14 @@ body {
   margin: auto;
   display: flex;
   align-items: center;
-  transition:
-    height 0.2s ease,
-    transform 0.5s ease;
   overflow: hidden;
-  transform: scale(0);
+  transition: height 0.2s ease;
+  /* transform 0.5s ease; */
+  /* transform: scale(0); */
 }
-.auth-modal.show {
+/* .auth-modal.show {
   transform: scale(1);
-}
+} */
 .auth-modal.slide {
   height: 520px;
 }
@@ -227,6 +226,16 @@ body {
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
+  color: var(--text-main);
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.input-box i:hover {
+  opacity: 1;
+}
+.input-box .fa-eye:hover,
+.input-box .fa-eye-slash:hover {
+  cursor: pointer;
 }
 .btn {
   width: 100%;
@@ -254,78 +263,80 @@ body {
   text-decoration: underline;
   color: var(--border-ui);
 }
-.auth-modal .close-btn-modal {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 45px;
-  height: 45px;
-  background: var(--border-ui);
-  border: none;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  font-size: 35px;
-  color: var(--text-main);
-  cursor: pointer;
-  z-index: 1;
+.alert-box {
+  position: fixed;
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%) translateY(calc(-100% - 35px)); /* Combine both transforms */
+  top: 35px;
+  min-width: 250px;
+  max-width: 90%;
+  width: max-content; /* Shrinks to fit text exactly */
+  min-height: 60px; /* Minimum height for short messages */
+  height: auto; /* Allows it to grow for long messages */
+  background: var(--navbar-cl);
+  border-radius: 6px;
+  padding: 15px 20px; /* More vertical padding for multi-line text */
+  z-index: 1000; /* Ensure it stays on top of everything */
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  transition: transform 0.5s ease;
 }
-/* .auth-modal .close-modal {
-  position: relative;
-  border: none;
-  cursor: pointer;
-}
-.auth-modal .close-modal .closed-img {
-  position: absolute;
-  top: -5px;
-  left: 10px;
-} */
-.alert-box {
-  position: fixed;
-  inset: 0;
-  margin: 0 auto;
-  top: 35px;
-  width: 350px;
-  height: 70px;
-  background: var(--navbar-cl);
-  /* background: #7c797993; */
-  border-radius: 6px;
-  padding: 0 15px;
-  z-index: 100;
-  overflow: hidden;
-  transform: translateY(calc(-100% - 35px));
-  transition: 0.5s ease;
-}
-/* .alert img {
-  background-color: #03d17a;
-} */
 .alert-box.show {
-  transform: translateY(0);
+  /* Keep the horizontal center while moving it down */
+  transform: translateX(-50%) translateY(0);
 }
+/* 1. Ensure the parent has 'relative' so the bar knows where to stick */
 .alert {
+  position: relative;
   display: flex;
+  gap: 10px;
   align-items: center;
   height: 100%;
+  padding: 10px 15px;
   color: var(--bg-header);
   font-weight: 600;
+  white-space: nowrap;
 }
+.alert-box i {
+  font-size: 18px;
+}
+
+/* 2. The Bar - Give it a clear starting state */
 .alert::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
   height: 5px;
+  width: 0%; /* Start at zero */
   background-color: var(--border-ui);
-  animation: progress 6s linear forwards;
+  display: block; /* Force it to be an actual box */
 }
-.alert.error::after {
-  background: red;
+
+/* 3. The Trigger - Match this exactly to your JS class */
+.alert-box.show .alert::after {
+  animation: progress 3s linear forwards;
 }
+/* Ensure the bar turns red when the 'error' class is added to the parent */
+.alert-box.error .alert::after {
+  background-color: #ff4d4d !important; /* Forces the red color */
+}
+
+/* Optional: Make the text bold for errors */
+.alert-box.error span {
+  color: #ff4d4d;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+/* 4. The Story - From 100 to 0 */
 @keyframes progress {
+  0% {
+    width: 100%;
+  }
   100% {
-    width: 0;
+    width: 0%;
   }
 }
