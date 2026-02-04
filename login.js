@@ -73,28 +73,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 4. SIGN UP LOGIC ---
+    // function handleSignUpSuccess(event) {
+    //     event.preventDefault();
+    //     const name = event.target.name.value;
+    //     const email = event.target.email.value;
+    //     const password = event.target.password.value; 
+
+    //     if (password.length < 8) {
+    //         showAlert("Password must be at least 8 characters long!", true);
+    //         return; 
+    //     }
+
+    //     const existingAccount = localStorage.getItem('userAccount');
+    //     if (existingAccount && JSON.parse(existingAccount).email === email) {
+    //         showAlert("Error: Email already registered!", true);
+    //         return;
+    //     }
+
+    //     const userCredentials = { name, email, password };
+    //     localStorage.setItem('userAccount', JSON.stringify(userCredentials));
+        
+    //     showAlert("Account Created! Please Login.");
+
+    //     setTimeout(() => {
+    //         authModal.classList.remove('slide'); 
+    //         event.target.reset();
+    //         if (loginForm) loginForm.reset();
+    //     }, 3000);
+    // }
     function handleSignUpSuccess(event) {
-        event.preventDefault();
+        event.preventDefault(); // Stop the form from refreshing the page
+        
+        // 1. Grabbing the Data
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value; 
 
+        // 2. Validation (The "Bouncer")
         if (password.length < 8) {
             showAlert("Password must be at least 8 characters long!", true);
             return; 
         }
 
+        // 3. Checking for Existing Accounts
         const existingAccount = localStorage.getItem('userAccount');
         if (existingAccount && JSON.parse(existingAccount).email === email) {
             showAlert("Error: Email already registered!", true);
             return;
         }
 
+        // 4. Saving the Data
         const userCredentials = { name, email, password };
         localStorage.setItem('userAccount', JSON.stringify(userCredentials));
         
         showAlert("Account Created! Please Login.");
 
+        // 5. Cleanup
         setTimeout(() => {
             authModal.classList.remove('slide'); 
             event.target.reset();
